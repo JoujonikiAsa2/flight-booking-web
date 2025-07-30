@@ -45,7 +45,6 @@ export default function Header() {
                 >
                   <Button
                     className="bg-foreground text-white h-8 p-0 px-2"
-                    onClick={handleLogOut}
                   >
                     Dashboard
                   </Button>
@@ -54,7 +53,6 @@ export default function Header() {
                 >
                   <Button
                     className="ml-2 bg-foreground text-white h-8 p-0 px-2"
-                    onClick={handleLogOut}
                   >
                     Dashboard
                   </Button>
