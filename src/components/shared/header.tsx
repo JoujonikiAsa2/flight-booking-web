@@ -41,7 +41,7 @@ export default function Header() {
                   Logout
                 </Button>
                 {user?.role === "ADMIN" ? <Link
-                  href={`/dashboard/admin/overview}`}
+                  href={`/dashboard/admin/overview`}
                 >
                   <Button
                     className="bg-foreground text-white h-8 p-0 px-2"
