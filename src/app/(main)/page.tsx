@@ -2,7 +2,6 @@
 import FilterFlight from "@/components/flight/filter-flight";
 import FlightLists from "@/components/flight/flight-lists";
 import HeroSection from "@/components/home/hero-section";
-import Footer from "@/components/shared/footer";
 import { filterFlights, getFlights } from "@/services/flights";
 import { TFilterProps } from "@/types/global";
 import React from "react";

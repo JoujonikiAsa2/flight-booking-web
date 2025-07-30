@@ -4,6 +4,7 @@ import "./globals.css";
 import { Toaster } from "sonner";
 import Header from "@/components/shared/header";
 import Footer from "@/components/shared/footer";
+import ReduxProvider from "@/redux/provider/ReduxProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,12 +31,14 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-secondary min-h-screen flex flex-col`}
       >
-        <Header />
-        <main className="flex-grow max-w-[80rem] mx-auto w-full">
-          {children}
-        </main>
-        <Footer />
-        <Toaster position="top-center" />
+        <ReduxProvider>
+          <Header />
+          <main className="flex-grow max-w-[80rem] mx-auto w-full">
+            {children}
+          </main>
+          <Footer />
+          <Toaster position="top-center" />
+        </ReduxProvider>
       </body>
     </html>
   );

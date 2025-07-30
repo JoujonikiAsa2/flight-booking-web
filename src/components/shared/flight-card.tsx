@@ -1,10 +1,10 @@
 "use client";
 import React from "react";
-import { TFlights } from "@/types/global";
+import { TFlight } from "@/types/global";
 import { motion } from "framer-motion";
 import Link from "next/link";
 
-export default function FlightCard({ flight }: { flight: TFlights }) {
+export default function FlightCard({ flight }: { flight: TFlight }) {
   return (
     <motion.div
       className="w-full bg-card shadow-md rounded-2xl p-6 flex flex-col gap-4 w-full border border-gray-100"
@@ -45,7 +45,7 @@ export default function FlightCard({ flight }: { flight: TFlights }) {
 
       <div className="flex justify-between items-center mt-4">
         <p className="text-lg font-semibold text-primary">${flight.price}</p>
-        <Link href="/flight-booking">
+        <Link href={`/flight-booking/${flight._id}`}>
           <button className="px-4 py-2 bg-primary text-white rounded-lg hover:scale-110 hover:cursor-pointer text-sm">
             Book Now
           </button>

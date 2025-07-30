@@ -4,8 +4,15 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
 import { FieldValues, SubmitHandler } from "react-hook-form";
 import TabForm from "./tab-form";
 import { toast } from "sonner";
+import { jwtDecode } from "jwt-decode";
+import { AuthUser } from "@/types/global";
+import { setUser } from "@/redux/features/auth/authSlice";
+import { useAppDispatch } from "@/redux/hook";
+import { useRouter } from "next/navigation";
 
 export default function AuthenticationForm() {
+  const route = useRouter();
+  const dispatch = useAppDispatch();
   const [isLoading, setIsLoading] = React.useState(false);
   const [formType, setFormType] = React.useState("");
 
@@ -20,9 +27,17 @@ export default function AuthenticationForm() {
         body: JSON.stringify(data),
       });
       const response = await res.json();
+      const user = jwtDecode<AuthUser>(response.data.token);
+      dispatch(setUser({ user, token: response.data.token }));
       setIsLoading(false);
-      toast.success(response.message);
-      console.log(response);
+      setTimeout(() => {
+        if (response.ok) {
+          toast.success(response.message);
+          route.push("/");
+        } else {
+          toast.warning(response.message);
+        }
+      }, 1000);
     } catch (error) {
       console.error(error);
       toast.success("Internal Server error");

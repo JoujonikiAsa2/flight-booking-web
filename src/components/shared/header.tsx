@@ -1,30 +1,56 @@
+"use client";
 import React from "react";
 import { Badge } from "../ui/badge";
 import Button from "../ui/button";
-import getUser from "@/helpers/getUser";
+import { logoutUser } from "@/services/auth";
+import Link from "next/link";
+import { useAppSelector,useAppDispatch } from "@/redux/hook";
+import { currentUser, removeUser } from "@/redux/features/auth/authSlice";
 
-export default async function Header() {
-    const user = await getUser()
+export default function Header() {
+  const dispatch= useAppDispatch()
+  const user = useAppSelector(currentUser)
+
+  React.useEffect(() => {}, [user]);
+  const handleLogOut = async () => {
+    await logoutUser();
+    dispatch(removeUser())
+  };
   return (
-      <header className="bg-white shadow-sm border-b">
-        <div className="max-w-[80rem] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center">
-              <h1 className="text-2xl font-bold text-gray-900">FlyBuddy</h1>
-            </div>
-            <div className="flex items-center space-x-4">
+    <header className="bg-white shadow-sm border-b">
+      <div className="max-w-[80rem] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-16">
+          <Link href="/" className="flex items-center">
+            <h1 className="text-2xl font-bold text-gray-900">FlyBuddy</h1>
+          </Link>
+          <div className="flex items-center space-x-4">
+            {user && (
               <Badge variant="secondary" className="px-3 py-1">
                 {user?.role === "admin" ? "Admin" : "User"}
               </Badge>
+            )}
+            {user && (
               <span className="text-sm text-gray-600">
                 Welcome, {user?.name}
               </span>
-              <Button className="bg-primary text-white h-8 p-0 px-2">
+            )}
+            {user ? (
+              <Button
+                className="bg-primary text-white h-8 p-0 px-2"
+                onClick={handleLogOut}
+              >
                 Logout
               </Button>
-            </div>
+            ) : (
+              <Link href="/login">
+                <Button className="bg-primary text-white h-8 p-0 px-2">
+                  Login
+                </Button>
+              </Link>
+            )}
           </div>
         </div>
-      </header>
+      </div>
+    </header>
   );
 }

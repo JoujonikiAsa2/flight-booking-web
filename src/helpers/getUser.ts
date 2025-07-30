@@ -5,8 +5,7 @@ import { jwtDecode } from "jwt-decode";
 import { cookies } from "next/headers";
 
 const getUser = async () => {
-  // const token =  (await cookies()).get("accessToken")?.value as string
-const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSm9obiBEb2UiLCJpZCI6IjY3NGEwOGQ1ZTlkOGVhZWU1YWU4Mjk2MSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTc1MzgxNjg0NCwiZXhwIjoxNzUzODIwNDQ0fQ._uYsnIrg3pyViEFPK9TvYuq9x7MhfN8L9gW9bFySTDo"
+  const token =  (await cookies()).get("accessToken")?.value as string
   if (!token) {
     return null; 
   }

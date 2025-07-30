@@ -1,4 +1,16 @@
-export type TFlights = {
+export type TSeat = {
+  _id: string;
+  flightId: string;
+  seatNumber: string;
+  isBooked: boolean;
+  bookedBy: string;
+  reservedAt: string | null;
+  __v: number;
+  createdAt: string; // ISO date string
+  updatedAt: string; // ISO date string
+};
+
+export type TFlight = {
   _id: string;
   airline: string;
   flight_number: string;
@@ -7,6 +19,13 @@ export type TFlights = {
   date: string;
   time: string;
   price: number;
+  seats?: TSeat[];
+  availability: boolean;
+};
+
+export type TFlightData = {
+  flight: TFlight;
+  seats: TSeat[];
 };
 
 export type TFilterProps = {
@@ -21,9 +40,9 @@ export type TFilterProps = {
 };
 
 export type AuthUser = {
-    name: string
-    id:string
-    role: string
-    iat: string
-    exp:string
-}
+  name: string;
+  id: string;
+  role: string;
+  iat: number;
+  exp: number;
+};
