@@ -10,6 +10,7 @@ import { currentUser, removeUser } from "@/redux/features/auth/authSlice";
 export default function Header() {
   const dispatch = useAppDispatch();
   const user = useAppSelector(currentUser);
+  console.log(user)
   const handleLogOut = async () => {
     await logoutUser();
     dispatch(removeUser());
@@ -27,12 +28,12 @@ export default function Header() {
                 {user?.role === "admin" ? "Admin" : "User"}
               </Badge>
             )}
-            {user && (
+            {user !== null && (
               <span className="text-sm text-gray-600">
                 Welcome, {user?.name}
               </span>
             )}
-            {user ? (
+            {user !== null  ? (
               <>
                 <Button
                   className="bg-primary text-white h-8 p-0 px-2"
@@ -40,7 +41,7 @@ export default function Header() {
                 >
                   Logout
                 </Button>
-                {user?.role === "ADMIN" ? <Link
+                {user.role === "ADMIN" ? <Link
                   href={`/dashboard/admin/overview`}
                 >
                   <Button

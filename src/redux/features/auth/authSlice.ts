@@ -9,14 +9,8 @@ type InitialValue = {
 };
 
 const initialState: InitialValue = {
-  user: {
-    name: "",
-    id: "",
-    role: "",
-    iat: 0,
-    exp: 0,
-  },
-  token: "",
+  user: null,
+  token: null,
 };
 
 export const authSlice = createSlice({
