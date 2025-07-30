@@ -32,11 +32,9 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-secondary min-h-screen flex flex-col`}
       >
         <ReduxProvider>
-          <Header />
-          <main className="flex-grow max-w-[80rem] mx-auto w-full">
+          <main className="flex-grow w-full">
             {children}
           </main>
-          <Footer />
           <Toaster position="top-center" />
         </ReduxProvider>
       </body>

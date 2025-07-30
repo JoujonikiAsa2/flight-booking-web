@@ -22,12 +22,13 @@ import Link from "next/link";
 import { toast } from "sonner";
 import Button from "@/components/ui/button";
 import { AuthUser, TFlightData, TSeat } from "@/types/global";
+import { currentUser } from "@/redux/features/auth/authSlice";
+import { useAppSelector } from "@/redux/hook";
 
 export default function BookingPage({
   flight,
 }: {
   flight: TFlightData | null;
-  user: AuthUser | null;
 }) {
   const [state, setState] = useState({
     selectedSeat: [] as string[],
@@ -38,7 +39,7 @@ export default function BookingPage({
     showPaymentDialog: false,
     bookedSeats: [] as string[],
   });
-
+const user = useAppSelector(currentUser)
   useEffect(() => {
     if (state.reservationTimer <= 0) return;
 
@@ -189,7 +190,7 @@ export default function BookingPage({
                 <span className="font-bold text-primary">${flight.flight.price}</span>
               </div>
             </div>
-            <Link href="/dashboard/user">
+            <Link href="/dashboard/user/my-bookings">
               <Button className="w-full bg-primary text-white">Back to Dashboard</Button>
             </Link>
           </CardContent>

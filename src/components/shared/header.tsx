@@ -4,17 +4,15 @@ import { Badge } from "../ui/badge";
 import Button from "../ui/button";
 import { logoutUser } from "@/services/auth";
 import Link from "next/link";
-import { useAppSelector,useAppDispatch } from "@/redux/hook";
+import { useAppSelector, useAppDispatch } from "@/redux/hook";
 import { currentUser, removeUser } from "@/redux/features/auth/authSlice";
 
 export default function Header() {
-  const dispatch= useAppDispatch()
-  const user = useAppSelector(currentUser)
-
-  React.useEffect(() => {}, [user]);
+  const dispatch = useAppDispatch();
+  const user = useAppSelector(currentUser);
   const handleLogOut = async () => {
     await logoutUser();
-    dispatch(removeUser())
+    dispatch(removeUser());
   };
   return (
     <header className="bg-white shadow-sm border-b">
@@ -35,12 +33,33 @@ export default function Header() {
               </span>
             )}
             {user ? (
-              <Button
-                className="bg-primary text-white h-8 p-0 px-2"
-                onClick={handleLogOut}
-              >
-                Logout
-              </Button>
+              <>
+                <Button
+                  className="bg-primary text-white h-8 p-0 px-2"
+                  onClick={handleLogOut}
+                >
+                  Logout
+                </Button>
+                {user?.role === "ADMIN" ? <Link
+                  href={`/dashboard/admin/overview}`}
+                >
+                  <Button
+                    className="bg-foreground text-white h-8 p-0 px-2"
+                    onClick={handleLogOut}
+                  >
+                    Dashboard
+                  </Button>
+                </Link>:<Link
+                  href={`/dashboard/user/my-bookings`}
+                >
+                  <Button
+                    className="ml-2 bg-foreground text-white h-8 p-0 px-2"
+                    onClick={handleLogOut}
+                  >
+                    Dashboard
+                  </Button>
+                </Link>}
+              </>
             ) : (
               <Link href="/login">
                 <Button className="bg-primary text-white h-8 p-0 px-2">

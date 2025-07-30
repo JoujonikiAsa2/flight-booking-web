@@ -1,11 +1,11 @@
 "use client";
 import React from "react";
 import FlightCard from "../shared/flight-card";
-import { TFlights } from "@/types/global";
+import { TFlight } from "@/types/global";
 import SectionTitle from "../shared/section-title";
 import { useSearchParams } from "next/navigation";
 
-export default function FlightLists({ flights }: { flights: TFlights[] }) {
+export default function FlightLists({ flights }: { flights: TFlight[] }) {
   const searchParams = useSearchParams();
   console.log(searchParams);
   return (
